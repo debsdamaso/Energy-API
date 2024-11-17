@@ -1,4 +1,5 @@
 using Energy_API.Services;
+using Energy_API.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,11 @@ builder.Services.AddScoped<Energy_API.Repositories.Interfaces.IMeterRepository, 
 builder.Services.AddScoped<Energy_API.Services.DeviceService>();
 builder.Services.AddScoped<Energy_API.Services.MeterService>();
 builder.Services.AddScoped<Energy_API.Services.EfficiencyService>();
+builder.Services.AddScoped<IDeviceService, DeviceService>();
+builder.Services.AddScoped<IEfficiencyService, EfficiencyService>();
+builder.Services.AddScoped<IMeterService, MeterService>();
+
+
 
 // Adicionando Controllers
 builder.Services.AddControllers();

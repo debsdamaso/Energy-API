@@ -1,5 +1,5 @@
 ﻿using Energy_API.Models;
-using Energy_API.Services;
+using Energy_API.Services.Interfaces; 
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -9,9 +9,9 @@ namespace Energy_API.Controllers
     [Route("api/[controller]")]
     public class DeviceController : ControllerBase
     {
-        private readonly DeviceService _deviceService;
+        private readonly IDeviceService _deviceService;
 
-        public DeviceController(DeviceService deviceService)
+        public DeviceController(IDeviceService deviceService) 
         {
             _deviceService = deviceService;
         }

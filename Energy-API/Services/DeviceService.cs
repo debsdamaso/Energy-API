@@ -1,12 +1,13 @@
 ﻿using Energy_API.Models;
 using Energy_API.Repositories.Interfaces;
+using Energy_API.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System;
 
 namespace Energy_API.Services
 {
-    public class DeviceService
+    public class DeviceService : IDeviceService
     {
         private readonly IDeviceRepository _deviceRepository;
 
@@ -18,7 +19,7 @@ namespace Energy_API.Services
         public async Task<List<Device>> GetAllDevicesAsync()
         {
             var devices = await _deviceRepository.GetAllDevicesAsync();
-            return devices ?? new List<Device>(); // Garante que nunca retorna nulo
+            return devices ?? new List<Device>();
         }
 
         public async Task<Device?> GetDeviceByIdAsync(string id)

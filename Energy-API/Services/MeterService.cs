@@ -3,10 +3,11 @@ using Energy_API.Repositories.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
+using Energy_API.Services.Interfaces;
 
 namespace Energy_API.Services
 {
-    public class MeterService
+    public class MeterService : IMeterService
     {
         private readonly IMeterRepository _meterRepository;
 

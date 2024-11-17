@@ -1,5 +1,5 @@
 ﻿using Energy_API.DTOs;
-using Energy_API.Services;
+using Energy_API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Energy_API.Controllers
@@ -8,9 +8,9 @@ namespace Energy_API.Controllers
     [Route("api/efficiency")]
     public class EfficiencyController : ControllerBase
     {
-        private readonly EfficiencyService _efficiencyService;
+        private readonly IEfficiencyService _efficiencyService;
 
-        public EfficiencyController(EfficiencyService efficiencyService)
+        public EfficiencyController(IEfficiencyService efficiencyService)
         {
             _efficiencyService = efficiencyService;
         }
@@ -19,7 +19,7 @@ namespace Energy_API.Controllers
         public IActionResult ClassifyDevice([FromBody] DeviceUsageDto dto)
         {
             string efficiencyClass = _efficiencyService.ClassifyDeviceEfficiency(dto.DeviceType, dto.MonthlyUsage);
-            return Ok(new { EfficiencyClass = efficiencyClass });
+            return Ok(new EfficiencyResponseDto { EfficiencyClass = efficiencyClass });
         }
     }
 }

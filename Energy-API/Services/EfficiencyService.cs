@@ -1,8 +1,9 @@
 ﻿using Energy_API.Models;
+using Energy_API.Services.Interfaces;
 
 namespace Energy_API.Services
 {
-    public class EfficiencyService
+    public class EfficiencyService : IEfficiencyService
     {
         public string ClassifyDeviceEfficiency(string deviceType, double monthlyUsage)
         {

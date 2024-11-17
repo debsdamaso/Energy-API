@@ -1,5 +1,5 @@
 ﻿using Energy_API.Models;
-using Energy_API.Services;
+using Energy_API.Services.Interfaces; // Importando a interface
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -9,9 +9,9 @@ namespace Energy_API.Controllers
     [Route("api/meters")]
     public class MeterController : ControllerBase
     {
-        private readonly MeterService _meterService;
+        private readonly IMeterService _meterService; // Alterado para a interface
 
-        public MeterController(MeterService meterService)
+        public MeterController(IMeterService meterService) // Ajustado para aceitar a interface
         {
             _meterService = meterService;
         }
