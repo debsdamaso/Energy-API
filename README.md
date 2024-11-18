@@ -71,7 +71,7 @@ A API foi projetada para seguir os princípios de **modularidade**, **escalabili
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-repositorio/davinci-energy.git
+   git clone https://github.com/debsdamaso/Energy-API.git
    ```
 
 2. Configure as variáveis de ambiente no `appsettings.json`:
@@ -85,7 +85,7 @@ A API foi projetada para seguir os princípios de **modularidade**, **escalabili
 
 ## ✅ **Testes**
 
-O projeto inclui testes automatizados para garantir a qualidade, cobertura e confiabilidade do sistema.
+O processo de testes do projeto incluiu testes automatizados para garantir a qualidade, cobertura verificar requisições e confiabilidade do sistema.
 
 ### **Testes Unitários**
 
