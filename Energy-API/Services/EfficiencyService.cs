@@ -1,5 +1,6 @@
 ﻿using Energy_API.Models;
 using Energy_API.Services.Interfaces;
+using System;
 
 namespace Energy_API.Services
 {
@@ -7,54 +8,70 @@ namespace Energy_API.Services
     {
         public string ClassifyDeviceEfficiency(string deviceType, double monthlyUsage)
         {
-            switch (deviceType)
+            if (string.IsNullOrWhiteSpace(deviceType))
+                throw new ArgumentException("O tipo do dispositivo não pode ser nulo ou vazio.");
+
+            if (monthlyUsage < 0)
+                throw new ArgumentException("O consumo mensal deve ser maior ou igual a zero.");
+
+            switch (deviceType.ToLower())
             {
-                case "Ar Condicionado":
+                case "ar condicionado":
                     if (monthlyUsage <= 100) return "A";
                     if (monthlyUsage <= 200) return "B";
                     if (monthlyUsage <= 300) return "C";
                     return "D";
-                case "Fogão":
+
+                case "fogão":
                     if (monthlyUsage <= 20) return "A";
                     if (monthlyUsage <= 40) return "B";
-                    if (monthlyUsage <= 60) return "C";
+                    if (monthlyUsage <= 60) return "C"; // Inclui consumo 50 como "C"
                     return "D";
-                case "Micro-ondas":
+
+                case "micro-ondas":
                     if (monthlyUsage <= 30) return "A";
-                    if (monthlyUsage <= 75) return "B"; // Ajustado
+                    if (monthlyUsage <= 75) return "B";
                     if (monthlyUsage <= 90) return "C";
                     return "D";
-                case "Forno elétrico":
+
+                case "forno elétrico":
                     if (monthlyUsage <= 50) return "A";
-                    if (monthlyUsage <= 120) return "B"; // Ajustado
+                    if (monthlyUsage <= 120) return "B";
                     if (monthlyUsage <= 150) return "C";
                     return "D";
-                case "Lâmpada":
+
+                case "lâmpada":
                     if (monthlyUsage <= 5) return "A";
                     if (monthlyUsage <= 10) return "B";
                     if (monthlyUsage <= 15) return "C";
                     return "D";
-                case "Lavador de roupa":
+
+                case "lavador de roupa":
                     if (monthlyUsage <= 80) return "A";
                     if (monthlyUsage <= 150) return "B";
                     if (monthlyUsage <= 200) return "C";
                     return "D";
-                case "Refrigerador":
+
+                case "refrigerador":
                     if (monthlyUsage <= 50) return "A";
                     if (monthlyUsage <= 100) return "B";
                     if (monthlyUsage <= 150) return "C";
                     return "D";
-                case "Televisor":
+
+                case "televisor":
                     if (monthlyUsage <= 30) return "A";
-                    if (monthlyUsage <= 65) return "B"; // Ajustado
+                    if (monthlyUsage <= 65) return "B";
                     if (monthlyUsage <= 90) return "C";
                     return "D";
-                case "Ventilador":
+
+                case "ventilador":
                     if (monthlyUsage <= 15) return "A";
                     if (monthlyUsage <= 30) return "B";
                     if (monthlyUsage <= 50) return "C";
                     return "D";
+
                 default:
+                    // Regra genérica para dispositivos desconhecidos
                     if (monthlyUsage <= 50) return "A";
                     if (monthlyUsage <= 100) return "B";
                     if (monthlyUsage <= 200) return "C";
