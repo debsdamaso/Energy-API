@@ -22,7 +22,8 @@ builder.Services.AddScoped<Energy_API.Services.EfficiencyService>();
 builder.Services.AddScoped<IDeviceService, DeviceService>();
 builder.Services.AddScoped<IEfficiencyService, EfficiencyService>();
 builder.Services.AddScoped<IMeterService, MeterService>();
-
+// Serviço de IA
+builder.Services.AddHttpClient<HuggingFaceService>();
 
 
 // Adicionando Controllers
