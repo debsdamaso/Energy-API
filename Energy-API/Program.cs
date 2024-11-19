@@ -1,13 +1,21 @@
+using Energy_API.Config;  // Importando o namespace correto
 using Energy_API.Services;
 using Energy_API.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Lendo a string de conexão do MongoDB do arquivo appsettings.json
+var mongoConnectionString = builder.Configuration.GetSection("MongoDB")["ConnectionString"];
+
+if (string.IsNullOrEmpty(mongoConnectionString))
+{
+    throw new ArgumentNullException("MongoDB connection string is not configured or is null.");
+}
+
 // Configuração do MongoDB
 builder.Services.AddSingleton(provider =>
 {
-    var configuration = builder.Configuration;
-    var mongoConfig = new Energy_API.Config.MongoDBConfig(configuration);
+    var mongoConfig = new Energy_API.Config.MongoDBConfig(builder.Configuration);
     return mongoConfig.GetDatabase();
 });
 
@@ -25,9 +33,11 @@ builder.Services.AddScoped<IMeterService, MeterService>();
 // Serviço de IA
 builder.Services.AddHttpClient<HuggingFaceService>();
 
-
 // Adicionando Controllers
 builder.Services.AddControllers();
+
+// Configuração do HealthCheck
+builder.Services.ConfigureHealthChecks(mongoConnectionString);  // Passando a string de conexão corretamente
 
 // Configurando Swagger para Documentação
 builder.Services.AddEndpointsApiExplorer();
@@ -50,9 +60,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Middlewares
+// Ordem correta dos middlewares
+
 app.UseHttpsRedirection();
+
+// Middleware de roteamento
+app.UseRouting();  // Roteamento deve vir antes de UseEndpoints()
+
 app.UseAuthorization();
+
+// Configuração do HealthCheck
+app.MapHealthChecks("/api/health", HealthCheckConfig.JsonResponseWriter());
+
 app.MapControllers();
 
 app.Run();

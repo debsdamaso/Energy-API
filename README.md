@@ -34,6 +34,7 @@ Por exemplo, um usuário pode acompanhar em um aplicativo móvel informações c
 - [Tecnologias e Ferramentas](#tecnologias-e-ferramentas)
 - [Configuração](#configuração)
 - [Testes](#testes)
+- [Monitoramento ativo com HealthCheck](#healthcheck)
 - [Documentação das APIs](#documentação-das-apis)
 - [Implementação de IA Generativa](#implementação-de-ia-generativa)
 
@@ -106,6 +107,42 @@ Os testes de integração garantem que as camadas da aplicação (Controller, Se
   
 - **Testes de Repositório com MongoDB Local**:
   Utilizamos uma **instância local do MongoDB** para testar as operações de leitura e escrita diretamente no banco. Isso garante que as operações de CRUD estão funcionando como esperado.
+
+## 📝 **Monitoramento ativo com HealthCheck**
+
+Para garantir a disponibilidade e integridade dos principais componentes da aplicação, implementamos um HealthCheck que realiza verificações periódicas e pode ser consultado por ferramentas de monitoramento.
+
+### **O que o HealthCheck Verifica**
+
+- **Status do MongoDB**: Verifica se a aplicação está corretamente conectada ao banco de dados MongoDB. O HealthCheck tenta estabelecer uma conexão com o banco de dados usando a string de conexão fornecida e verifica se o MongoDB está acessível e funcionando corretamente.
+
+- **Status do Servidor**: Realiza uma verificação simples para garantir que o servidor da API está respondendo corretamente e que não há problemas com o serviço.
+
+### **Como funciona**
+
+O HealthCheck é registrado no pipeline da aplicação e fica disponível no endpoint **`https://localhost:7010/api/health`**. Quando esse endpoint é acessado, ele retorna um status de saúde detalhado da aplicação.
+
+#### Exemplo de resposta saudável:
+
+```json
+{
+    "status": "Healthy",
+    "results": [
+        {
+            "name": "MongoDB",
+            "status": "Healthy",
+            "description": null,
+            "duration": "00:00:01.0548435"
+        },
+        {
+            "name": "Server",
+            "status": "Healthy",
+            "description": "Server is up and running",
+            "duration": "00:00:00.0024556"
+        }
+    ]
+}
+```
 
 ---
 
