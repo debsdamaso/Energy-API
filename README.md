@@ -15,7 +15,6 @@ A DaVinci Energy visa ajudar residências e pequenos comércios a monitorar, con
 🎯 Nossa premissa é: 
 - Controlar a vida útil dos aparelhos por meio da análise de eficiência energética, permitindo que o usuário saiba quando deve substituir um aparelho ou se há necessidade de troca devido a ineficiências.
 - Detectar possíveis defeitos em aparelhos que estejam consumindo mais energia do que o esperado.
-- Validar a veracidade das classificações de eficiência energética fornecidas por órgãos como o Inmetro.
 
 📲 O usuário poderá cadastrar dispositivos e equipamentos através do nosso aplicativo Mobile. Com base nos dados recebidos, a solução calcula o consumo de energia elétrica de cada dispositivo, compara os valores com os padrões fornecidos pelo fabricante e por órgãos reguladores, e fornece informações úteis para os usuários.
 Por exemplo, um usuário pode acompanhar em um aplicativo móvel informações como:
